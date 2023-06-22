@@ -26,7 +26,7 @@ public class TimezoneListState implements State {
         var groupButtons = ZoneId.getAvailableZoneIds().stream()
                 .filter(id -> id.startsWith(group + "/") && id.length() < 20)
                 .sorted()
-                .limit(20)
+                .limit(99)
                 .map(id -> new Button(id, Callback.of(id)))
                 .collect(toList());
         groupButtons.add(new Button("Назад", Callback.of("back")));
