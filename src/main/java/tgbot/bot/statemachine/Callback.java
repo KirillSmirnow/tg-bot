@@ -31,6 +31,10 @@ public class Callback {
 
     @SneakyThrows
     public String serialize() {
-        return OBJECT_MAPPER.writeValueAsString(this);
+        var output = OBJECT_MAPPER.writeValueAsString(this);
+        if (output.length() > 64) {
+            throw new RuntimeException("Serialized Callback exceeds length of 64: " + output);
+        }
+        return output;
     }
 }
