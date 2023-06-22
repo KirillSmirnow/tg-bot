@@ -29,12 +29,17 @@ public class ProfileState implements State {
     @Override
     public List<Button> getButtons() {
         return List.of(
+                new Button("Редактировать имя", Callback.of("edit")),
                 new Button("Меню", Callback.of("menu"))
         );
     }
 
     @Override
     public State getNextState(Callback callback) {
-        return new MenuState(userId);
+        return switch (callback.getOperation()) {
+            case "edit" -> new NameEditState(userId);
+            case "menu" -> new MenuState(userId);
+            default -> this;
+        };
     }
 }
